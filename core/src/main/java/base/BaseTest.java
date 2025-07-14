@@ -20,7 +20,6 @@ public class BaseTest {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    private static final String BASE_URL = "http://jupiter-01:8080/zema/LoginAction.do";
     private static final int IMPLICIT_WAIT = 10;
     private static final int EXPLICIT_WAIT = 20;
 
@@ -67,7 +66,7 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, java.util.concurrent.TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, java.util.concurrent.TimeUnit.SECONDS);
-        driver.get(BASE_URL);
+        driver.get(ConfigManager.getBaseUrl());
     }
 
     @AfterTest

@@ -24,15 +24,31 @@ public class LoginTest extends BaseTest {
     
     @Test(description = "Verify successful login with valid credentials")
     public void testSuccessfulLogin() {
-        // This test will be skipped for now due to WebDriver issues
-        System.out.println("Login test would run here if WebDriver was available");
-        Assert.assertTrue(true, "Test placeholder - WebDriver not available");
+        LoginPage loginPage = new LoginPage(driver);
+        
+        // Verify login page is displayed
+        Assert.assertTrue(loginPage.isLoginPageDisplayed(), "Login page should be displayed");
+        Assert.assertEquals(loginPage.getPageTitle(), ConfigManager.getProperty("app.login.title"), 
+                           "Login page title should match expected");
+        
+        // Perform login with new credentials
+        loginPage.login(ConfigManager.getUsername(), ConfigManager.getPassword());
+        
+        // Verify successful login
+        Assert.assertEquals(driver.getTitle(), ConfigManager.getProperty("app.dashboard.title"), 
+                           "Dashboard title should match after successful login");
+        
+        System.out.println("Login test completed successfully with credentials: " + ConfigManager.getUsername());
     }
     
     @Test(description = "Verify login page elements are present")
     public void testLoginPageElements() {
-        // This test will be skipped for now due to WebDriver issues
-        System.out.println("Login page elements test would run here if WebDriver was available");
-        Assert.assertTrue(true, "Test placeholder - WebDriver not available");
+        LoginPage loginPage = new LoginPage(driver);
+        
+        Assert.assertTrue(loginPage.isLoginPageDisplayed(), "Login page should be displayed");
+        Assert.assertEquals(loginPage.getPageTitle(), ConfigManager.getProperty("app.login.title"), 
+                           "Login page title should match expected");
+        
+        System.out.println("Login page elements test completed successfully");
     }
 }

@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import utils.ConfigManager;
 
 public class LoginPage extends BasePage {
     
@@ -11,16 +12,14 @@ public class LoginPage extends BasePage {
     private static final By LOGIN_BUTTON = By.xpath("//*[@type='submit']");
     private static final By LOGIN_TITLE = By.tagName("title");
     
-    // Expected values
-    private static final String LOGIN_PAGE_TITLE = "Zema Enterprise 5.13.0-SNAPSHOT (revision 109202)";
-    private static final String DASHBOARD_TITLE = "Zema Enterprise 5.13";
+    // Expected values - will be loaded from configuration
     
     public LoginPage(WebDriver driver) {
         super(driver);
     }
     
     public void waitForLoginPageToLoad() {
-        waitForPageTitle(LOGIN_PAGE_TITLE);
+        waitForPageTitle(ConfigManager.getProperty("app.login.title"));
     }
     
     public void enterUsername(String username) {
@@ -40,7 +39,7 @@ public class LoginPage extends BasePage {
         enterUsername(username);
         enterPassword(password);
         clickLoginButton();
-        waitForPageTitle(DASHBOARD_TITLE);
+        waitForPageTitle(ConfigManager.getProperty("app.dashboard.title"));
     }
     
     public boolean isLoginPageDisplayed() {
