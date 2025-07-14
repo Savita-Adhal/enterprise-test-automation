@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="AutomationSuite" verbose="1" parallel="tests" thread-count="2" data-provider-thread-count="2">
+
+    <test name="LoginTests" parallel="methods" thread-count="1">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="ProfileCreationTests" parallel="methods" thread-count="1">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="CreateProfileTest"/>
+        </classes>
+    </test>
+
+    <test name="ScreenshotDemoTests" parallel="methods" thread-count="1">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="ScreenshotDemoTest"/>
+        </classes>
+    </test>
+
+    <test name="PageFactoryDemoTests" parallel="methods" thread-count="1">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="PageFactoryDemoTest"/>
+        </classes>
+    </test>
+
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+    </listeners>
+
+</suite>

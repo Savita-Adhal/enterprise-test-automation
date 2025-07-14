@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+// Set Java compatibility to 8
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.seleniumhq.selenium:selenium-java:3.141.59")  
+    implementation("io.github.bonigarcia:webdrivermanager:4.4.3")
+    implementation("org.slf4j:slf4j-api:1.7.36")
+    implementation("ch.qos.logback:logback-classic:1.2.12")
+    testImplementation("org.testng:testng:6.14.3")
+    testImplementation("com.aventstack:extentreports:4.1.7")
+}
+
+test {
+    useTestNG(){
+        outputDirectory = file("test-output")
+        useDefaultListeners = true
+    }
+}

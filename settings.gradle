@@ -1,0 +1,3 @@
+rootProject.name = 'RegressionTesting'
+include 'market-analyzer'
+include 'core'
