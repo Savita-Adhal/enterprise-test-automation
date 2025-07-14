@@ -16,9 +16,17 @@ public class ConfigManager {
     private static void loadProperties() {
         properties = new Properties();
         try {
-            FileInputStream fis = new FileInputStream("src/main/resources/" + CONFIG_FILE);
-            properties.load(fis);
-            fis.close();
+            // Try to load from classpath first
+            java.io.InputStream is = ConfigManager.class.getClassLoader().getResourceAsStream(CONFIG_FILE);
+            if (is != null) {
+                properties.load(is);
+                is.close();
+            } else {
+                // Fallback to file system path
+                FileInputStream fis = new FileInputStream("src/main/resources/" + CONFIG_FILE);
+                properties.load(fis);
+                fis.close();
+            }
         } catch (IOException e) {
             throw new RuntimeException("Failed to load configuration file: " + e.getMessage());
         }

@@ -20,7 +20,7 @@ public class LoginPageFactory extends BasePageFactory {
     @FindBy(xpath = "//*[@type='submit']")
     private WebElement loginButton;
     
-    @FindBy(cssSelector = "form[action*='LoginAction']")
+    @FindBy(css = "form[action*='LoginAction']")
     private WebElement loginForm;
     
     @FindBy(className = "error-message")
@@ -29,13 +29,13 @@ public class LoginPageFactory extends BasePageFactory {
     @FindBy(className = "validation-message")
     private WebElement validationMessage;
     
-    @FindBy(cssSelector = ".logo")
+    @FindBy(css = ".logo")
     private WebElement logo;
     
     @FindBy(className = "login-container")
     private WebElement loginContainer;
     
-    @FindBy(cssSelector = ".welcome-message")
+    @FindBy(css = ".welcome-message")
     private WebElement welcomeMessage;
     
     // Expected values

@@ -1,4 +1,4 @@
-import Base.BaseTest;
+import base.BaseTest;
 import pages.LoginPageFactory;
 import pages.DashboardPageFactory;
 import utils.ConfigManager;
@@ -6,8 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Demo test class showing PageFactory pattern usage
- * This demonstrates the advanced PageFactory approach alongside traditional POM
+ * Demo test class showcasing PageFactory pattern usage
+ * Compares traditional Page Object Model vs PageFactory approach
  */
 public class PageFactoryDemoTest extends BaseTest {
 

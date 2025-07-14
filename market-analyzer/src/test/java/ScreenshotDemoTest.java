@@ -1,4 +1,4 @@
-import Base.BaseTest;
+import base.BaseTest;
 import pages.LoginPage;
 import utils.ConfigManager;
 import utils.TestAssertions;
@@ -6,7 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Demo test class showing different screenshot capture methods
+ * Demo test class showcasing screenshot functionality
+ * Demonstrates various screenshot capture scenarios
  */
 public class ScreenshotDemoTest extends BaseTest {
 

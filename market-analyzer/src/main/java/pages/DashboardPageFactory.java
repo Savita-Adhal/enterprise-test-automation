@@ -20,7 +20,7 @@ public class DashboardPageFactory extends BasePageFactory {
     @FindBy(className = "main-navigation")
     private WebElement mainNavigation;
     
-    @FindBy(cssSelector = ".user-profile-dropdown")
+    @FindBy(css = ".user-profile-dropdown")
     private WebElement userProfileDropdown;
     
     @FindBy(linkText = "Logout")
@@ -29,13 +29,13 @@ public class DashboardPageFactory extends BasePageFactory {
     @FindBy(linkText = "Settings")
     private WebElement settingsLink;
     
-    @FindBy(cssSelector = ".user-avatar")
+    @FindBy(css = ".user-avatar")
     private WebElement userAvatar;
     
     @FindBy(className = "dashboard-container")
     private WebElement dashboardContainer;
     
-    @FindBy(cssSelector = ".welcome-message")
+    @FindBy(css = ".welcome-message")
     private WebElement welcomeMessage;
     
     @FindBy(className = "quick-actions")
@@ -44,10 +44,10 @@ public class DashboardPageFactory extends BasePageFactory {
     @FindBy(className = "side-menu")
     private WebElement sideMenu;
     
-    @FindBy(cssSelector = ".menu-item")
+    @FindBy(css = ".menu-item")
     private WebElement menuItems;
     
-    @FindBy(cssSelector = ".sub-menu-item")
+    @FindBy(css = ".sub-menu-item")
     private WebElement subMenuItems;
     
     @FindBy(className = "notification-panel")
@@ -56,13 +56,13 @@ public class DashboardPageFactory extends BasePageFactory {
     @FindBy(className = "alert-message")
     private WebElement alertMessage;
     
-    @FindBy(cssSelector = ".success-message")
+    @FindBy(css = ".success-message")
     private WebElement successMessage;
     
-    @FindBy(cssSelector = ".search-box input")
+    @FindBy(css = ".search-box input")
     private WebElement searchBox;
     
-    @FindBy(cssSelector = ".search-box button")
+    @FindBy(css = ".search-box button")
     private WebElement searchButton;
     
     @FindBy(className = "filter-panel")

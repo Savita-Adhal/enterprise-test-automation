@@ -1,9 +1,9 @@
-import Base.BaseTest;
 import pages.LoginPage;
 import pages.DashboardPage;
 import utils.ConfigManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import base.BaseTest;
 
 public class CreateProfileTest extends BaseTest {
 

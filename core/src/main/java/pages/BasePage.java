@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -134,5 +135,65 @@ public abstract class BasePage {
      */
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
+    }
+    
+    // By-based methods for backward compatibility
+    /**
+     * Wait for element to be visible using By locator
+     * @param by By locator
+     * @return WebElement once visible
+     */
+    protected WebElement waitForElementVisible(By by) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+    
+    /**
+     * Wait for element to be clickable using By locator
+     * @param by By locator
+     * @return WebElement once clickable
+     */
+    protected WebElement waitForElementClickable(By by) {
+        return wait.until(ExpectedConditions.elementToBeClickable(by));
+    }
+    
+    /**
+     * Click on an element using By locator
+     * @param by By locator
+     */
+    protected void click(By by) {
+        waitForElementClickable(by).click();
+    }
+    
+    /**
+     * Send keys to an element using By locator
+     * @param by By locator
+     * @param text Text to send
+     */
+    protected void sendKeys(By by, String text) {
+        WebElement visibleElement = waitForElementVisible(by);
+        visibleElement.clear();
+        visibleElement.sendKeys(text);
+    }
+    
+    /**
+     * Get text from an element using By locator
+     * @param by By locator
+     * @return Text content of the element
+     */
+    protected String getText(By by) {
+        return waitForElementVisible(by).getText();
+    }
+    
+    /**
+     * Check if an element is displayed using By locator
+     * @param by By locator
+     * @return true if element is displayed, false otherwise
+     */
+    protected boolean isElementDisplayed(By by) {
+        try {
+            return waitForElementVisible(by).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 } 

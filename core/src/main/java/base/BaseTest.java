@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Optional;
 import utils.ConfigManager;
 import utils.ScreenshotUtils;
 
@@ -25,7 +26,7 @@ public class BaseTest {
 
     @Parameters({"browser"})
     @BeforeTest
-    public void setUp(String browserName) {
+    public void setUp(@Optional("firefox") String browserName) {
         try {
             driver = createDriver(browserName);
             setupDriver();
@@ -39,9 +40,13 @@ public class BaseTest {
     private WebDriver createDriver(String browserName) {
         switch (browserName.toLowerCase()) {
             case "chrome":
-                WebDriverManager.chromedriver().setup();
+                WebDriverManager.chromedriver().driverVersion("latest").setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--start-maximized");
+                chromeOptions.addArguments("--headless");
+                chromeOptions.addArguments("--no-sandbox");
+                chromeOptions.addArguments("--disable-dev-shm-usage");
+                chromeOptions.addArguments("--disable-gpu");
+                chromeOptions.addArguments("--window-size=1920,1080");
                 chromeOptions.addArguments("--disable-notifications");
                 chromeOptions.addArguments("--disable-popup-blocking");
                 return new ChromeDriver(chromeOptions);
