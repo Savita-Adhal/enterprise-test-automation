@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,9 +27,9 @@ public class BaseTest {
 
     @Parameters({"browser"})
     @BeforeTest
-    public void setUp(@Optional("firefox") String browserName) {
+    public void setUp(@Optional("chrome") String browserName) {
         try {
-            driver = createDriver(browserName);
+            driver = createDriver("edge");
             setupDriver();
             wait = new WebDriverWait(driver, EXPLICIT_WAIT);
         } catch (Exception e) {
@@ -41,15 +43,24 @@ public class BaseTest {
             case "chrome":
                 WebDriverManager.chromedriver().driverVersion("latest").setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--headless");
+                // Remove headless mode for local testing
+                // chromeOptions.addArguments("--headless");
                 chromeOptions.addArguments("--no-sandbox");
                 chromeOptions.addArguments("--disable-dev-shm-usage");
                 chromeOptions.addArguments("--disable-gpu");
                 chromeOptions.addArguments("--window-size=1920,1080");
                 chromeOptions.addArguments("--disable-notifications");
                 chromeOptions.addArguments("--disable-popup-blocking");
+                chromeOptions.addArguments("--remote-debugging-port=9222");
+                chromeOptions.addArguments("--disable-web-security");
+                chromeOptions.addArguments("--allow-running-insecure-content");
                 return new ChromeDriver(chromeOptions);
-                
+
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                EdgeOptions edgeOptions = new EdgeOptions();
+                return new EdgeDriver(edgeOptions);
+
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -62,16 +73,22 @@ public class BaseTest {
     }
 
     private void setupDriver() {
-        driver.manage().deleteAllCookies();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, java.util.concurrent.TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(30, java.util.concurrent.TimeUnit.SECONDS);
-        
-        // Open the staging URL
-        String baseUrl = ConfigManager.getBaseUrl();
-        System.out.println("Opening staging URL: " + baseUrl);
-        driver.get(baseUrl);
-        System.out.println("Successfully opened URL: " + driver.getCurrentUrl());
+        try {
+            driver.manage().deleteAllCookies();
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, java.util.concurrent.TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(30, java.util.concurrent.TimeUnit.SECONDS);
+            
+            // Open the staging URL
+            String baseUrl = ConfigManager.getBaseUrl();
+            System.out.println("Opening staging URL: " + baseUrl);
+            driver.get(baseUrl);
+            System.out.println("Successfully opened URL: " + driver.getCurrentUrl());
+        } catch (Exception e) {
+            System.err.println("Error in setupDriver: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     @AfterTest

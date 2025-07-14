@@ -3,7 +3,7 @@
 <suite name="AutomationSuite" verbose="1" parallel="tests" thread-count="2" data-provider-thread-count="2">
 
     <test name="LoginTests" parallel="methods" thread-count="1">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="edge"/>
         <classes>
             <class name="LoginTest"/>
         </classes>
