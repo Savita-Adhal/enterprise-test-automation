@@ -66,7 +66,12 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(IMPLICIT_WAIT, java.util.concurrent.TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, java.util.concurrent.TimeUnit.SECONDS);
-        driver.get(ConfigManager.getBaseUrl());
+        
+        // Open the staging URL
+        String baseUrl = ConfigManager.getBaseUrl();
+        System.out.println("Opening staging URL: " + baseUrl);
+        driver.get(baseUrl);
+        System.out.println("Successfully opened URL: " + driver.getCurrentUrl());
     }
 
     @AfterTest
@@ -111,5 +116,15 @@ public class BaseTest {
             System.err.println("Screenshot saved: " + screenshotPath);
         }
         return screenshotPath;
+    }
+    
+    /**
+     * Explicitly opens the staging URL - can be called from test methods if needed
+     */
+    protected void openStagingUrl() {
+        String baseUrl = ConfigManager.getBaseUrl();
+        System.out.println("Explicitly opening staging URL: " + baseUrl);
+        driver.get(baseUrl);
+        System.out.println("Successfully opened staging URL: " + driver.getCurrentUrl());
     }
 } 

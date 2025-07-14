@@ -24,6 +24,17 @@ public class LoginTest extends BaseTest {
     
     @Test(description = "Verify successful login with valid credentials")
     public void testSuccessfulLogin() {
+        // Explicitly open the staging URL (optional - already done in setUp)
+        // openStagingUrl();
+        
+        // Verify that we're on the correct staging URL
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = ConfigManager.getBaseUrl();
+        System.out.println("Current URL: " + currentUrl);
+        System.out.println("Expected URL: " + expectedUrl);
+        Assert.assertTrue(currentUrl.contains("5-13-staging-oracle.sandbox.zedev.net"), 
+                         "Should be on staging environment");
+        
         LoginPage loginPage = new LoginPage(driver);
         
         // Verify login page is displayed
@@ -32,6 +43,7 @@ public class LoginTest extends BaseTest {
                            "Login page title should match expected");
         
         // Perform login with new credentials
+        System.out.println("Attempting login with username: " + ConfigManager.getUsername());
         loginPage.login(ConfigManager.getUsername(), ConfigManager.getPassword());
         
         // Verify successful login
