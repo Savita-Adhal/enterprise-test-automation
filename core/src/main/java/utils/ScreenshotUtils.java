@@ -19,7 +19,7 @@ import java.util.List;
 public class ScreenshotUtils {
     
     private static final Logger logger = LoggerFactory.getLogger(ScreenshotUtils.class);
-    private static final String SCREENSHOT_DIR = "screenshots";
+    private static final String SCREENSHOT_DIR = "test-output/screenshots";
     private static final String SCREENSHOT_FORMAT = "png";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
     
@@ -57,8 +57,10 @@ public class ScreenshotUtils {
             // Copy file to destination
             Files.copy(screenshotFile.toPath(), screenshotPath);
             
-            logger.info("Screenshot captured successfully: {}", screenshotPath.toString());
-            return screenshotPath.toString();
+            // Convert backslashes to forward slashes for HTML compatibility
+            String htmlCompatiblePath = screenshotPath.toString().replace("\\", "/");
+            logger.info("Screenshot captured successfully: {}", htmlCompatiblePath);
+            return htmlCompatiblePath;
             
         } catch (IOException e) {
             logger.error("Failed to capture screenshot: {}", e.getMessage());
@@ -101,8 +103,10 @@ public class ScreenshotUtils {
             // Copy file to destination
             Files.copy(screenshotFile.toPath(), screenshotPath);
             
-            logger.info("Screenshot captured successfully: {}", screenshotPath.toString());
-            return screenshotPath.toString();
+            // Convert backslashes to forward slashes for HTML compatibility
+            String htmlCompatiblePath = screenshotPath.toString().replace("\\", "/");
+            logger.info("Screenshot captured successfully: {}", htmlCompatiblePath);
+            return htmlCompatiblePath;
             
         } catch (IOException e) {
             logger.error("Failed to capture screenshot: {}", e.getMessage());
